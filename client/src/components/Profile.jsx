@@ -39,18 +39,38 @@ export default function Profile() {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className=" bg-blue-400 shadow-md p-6 rounded-lg w-[50vw] h-[50vh] mx-auto m-30">
-      <h2>Profile</h2>
+  <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+    <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md">
+
+      <h2 className="text-2xl font-bold text-center mb-6">
+        Profile
+      </h2>
 
       {user ? (
-        <div>
-          <p>Name: {user.name}</p>
-          <p>Email: {user.email}</p>
-          <button onClick={handleLogout}>Logout</button>
+        <div className="flex flex-col gap-4">
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <p className="text-gray-500 text-sm">Name</p>
+            <p className="font-semibold text-lg">{user.name}</p>
+          </div>
+
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <p className="text-gray-500 text-sm">Email</p>
+            <p className="font-semibold text-lg">{user.email}</p>
+          </div>
+
+          <button
+            onClick={handleLogout}
+            className="mt-4 bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition"
+          >
+            Logout
+          </button>
         </div>
       ) : (
-        <p>No user logged in</p>
+        <p className="text-center text-gray-500">
+          No user logged in
+        </p>
       )}
     </div>
-  );
+  </div>
+);
 }
