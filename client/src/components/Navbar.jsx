@@ -1,16 +1,15 @@
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar({ count }) {
   const token = localStorage.getItem("token");
+  const navigate=useNavigate()
 
   return (
-    <nav className="bg-white shadow-md fixed top_0 w-full h-[70px] z-1" >
+    <nav className="bg-white shadow-md   w-full">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <h1
-          to="/"
-          className="text-xl font-bold text-blue-600"
-        >
+
+        <h1 onClick={()=>navigate("/")} className="text-xl font-bold text-blue-600" className="text-xl font-bold text-blue-600">
           MyShop
         </h1>
         <div className="flex gap-6 items-center">

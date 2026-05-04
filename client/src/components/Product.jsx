@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
-
+import { useNavigate,Link } from "react-router-dom";
+import CaddProduct from "./addProduct";
 
 
 export default function Product({ products, addToCart }) {
+
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
   return (
     <div className="bg-blue-100 min-h-screen">
@@ -20,15 +22,17 @@ export default function Product({ products, addToCart }) {
           {products.map((product) => (
             <div
               key={product._id || product.id}
-              className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300"
+               
+              className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 flex flex-col h-full"
             >
               <img
+              onClick={() => navigate("/details", { state: product })}
                 src={product.imageSrc || product.image}
                 alt={product.imageAlt || product.name}
-                className="w-full h-auto object-cover hover:scale-105 transition duration-300"
+                className="w-full h-auto object-cover hover:scale-105 transition duration-300 "
               />
 
-              <div className="p-5 flex flex-col gap-2">
+              <div className="p-5 flex flex-col gap-2 grow">
                 <h2 className="text-lg font-semibold text-gray-900">
                   {product.name}
                 </h2>
@@ -50,12 +54,13 @@ export default function Product({ products, addToCart }) {
                   dt
                 </p>
                 {token && (
-                  <button
+                  <button 
                     onClick={() => addToCart(product)}
-                    className="mt-3 w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 active:bg-blue-950 cursor-pointer transition font-semibold"
+                    className="mt-auto w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 active:bg-blue-950 cursor-pointer transition font-semibold"
                   >
                     Add to Cart
                   </button>
+                  
                 )}
               </div>
             </div>
