@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -27,11 +28,12 @@ export default function Login() {
       console.log("Login successful", res.data);
 
       localStorage.setItem("token", res.data.token);
-
+      localStorage.setItem("userId",res.data.id)
+      toast("login successful")
       navigate("/");
     } catch (error) {
       console.log("Login error:", error.response?.data || error.message);
-      alert("Invalid credentials");
+      toast("Invalid credentials");
     }
     setEmail("");
     setPassword("");

@@ -1,9 +1,11 @@
 import express from 'express'
 import cors from 'cors'
 import 'dotenv/config'
+import "./models/relations.js"
 import sequelize from './config/index.js';
 import userRoutes from './routes/userRoute.js';
-import productsRoute from './routes/productsRoute.js'
+import productsRoute from './routes/productsRoute.js';
+import cartRoutes from './routes/cartRoute.js'
 
 const port=process.env.PORT;
 const app=express()
@@ -13,6 +15,7 @@ app.use(cors())
 
 app.use('/api/users',userRoutes)
 app.use('/api/products',productsRoute)
+app.use('/api/cart', cartRoutes);
 
 
 

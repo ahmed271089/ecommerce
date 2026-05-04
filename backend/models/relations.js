@@ -13,11 +13,5 @@ Cart.belongsTo(Users, {
 });
 
 // PRODUCT - CART (One to Many)
-Products.hasMany(Cart, {
-  foreignKey: "productId",
-  onDelete: "CASCADE",
-});
-
-Cart.belongsTo(Products, {
-  foreignKey: "productId",
-});
+Cart.belongsTo(Products, { foreignKey: "productId" });
+Products.hasMany(Cart, { foreignKey: "productId" });
