@@ -27,7 +27,7 @@ export default function Cart({ cart, handleDelete,setCart }) {
       return;
     }
 
-    // 👉 validation
+    
     setShowModal(false);
     setIsValidated(true);
     setCart([])
@@ -35,7 +35,7 @@ export default function Cart({ cart, handleDelete,setCart }) {
     
   };
 
-  // 👉 SI VALIDÉ → afficher message
+  
   if (isValidated) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-100">

@@ -16,6 +16,7 @@ import Slider from "./components/Slider.jsx";
 import { toast } from "react-toastify";
 
 const App = () => {
+  
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState(() => {
     const saved = localStorage.getItem("cart");
@@ -35,10 +36,11 @@ const App = () => {
     setCart((prev) => [...prev, product]);
     toast("Product Added To Cart");
   };
- const handleDelete = (product) => {
-  setCart((prev) => prev.filter((item) => item.id !== product.id));
-  toast("Product removed from cart");
-};
+  const handleDelete = (product) => {
+  
+    setCart((prev) => prev.filter((item) => item.id !== product.id));
+    toast("Product removed from cart");
+  };
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -61,9 +63,8 @@ const App = () => {
           path="/"
           element={
             <>
-              
               <Slider />
-              <Product products={products} addToCart={addToCart}/>
+              <Product products={products} addToCart={addToCart} />
             </>
           }
         />
@@ -74,7 +75,12 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/cart" element={<Cart cart={cart} setCart={setCart} handleDelete={handleDelete}/>} />
+        <Route
+          path="/cart"
+          element={
+            <Cart cart={cart} setCart={setCart} handleDelete={handleDelete} />
+          }
+        />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route
