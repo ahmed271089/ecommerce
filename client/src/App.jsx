@@ -13,6 +13,7 @@ import Login from "./components/Login.jsx";
 import Footer from "./components/Footer.jsx";
 import ProductDetails from "./components/ProductDetails.jsx";
 import Slider from "./components/Slider.jsx";
+import CaddProduct from "./components/addProduct.jsx";
 import { toast } from "react-toastify";
 
 const App = () => {
@@ -33,8 +34,22 @@ const App = () => {
   }, [cart]);
 
   const addToCart = (product) => {
-    setCart((prev) => [...prev, product]);
-    toast("Product Added To Cart");
+     try {
+    const userId = localStorage.getItem("userId");
+
+    const res =  axios.post(
+      "http://localhost:4000/api/cart/add",
+      {
+        userId,
+        productId: product.id
+      }
+    );
+    setCount(prev => prev + 1);
+    toast.success("Item added to cart 🛒");
+  } catch (err) {
+    console.error(err);
+    toast.error("Error adding item to cart ❌");
+  }
   };
   const handleDelete = (product) => {
   
@@ -57,7 +72,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Navbar count={count} />
-
+      <br />
       <Routes>
         <Route
           path="/"
@@ -87,6 +102,7 @@ const App = () => {
           path="/details"
           element={<ProductDetails addToCart={addToCart} />}
         />
+        <Route path="addProduct" element={<CaddProduct/>}/>
       </Routes>
       <Footer />
     </BrowserRouter>

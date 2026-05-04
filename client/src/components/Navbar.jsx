@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-export default function Navbar({count}) {
+export default function Navbar({ count }) {
   const token = localStorage.getItem("token");
   const navigate=useNavigate()
 
@@ -12,22 +12,26 @@ export default function Navbar({count}) {
         <h1 onClick={()=>navigate("/")} className="text-xl font-bold text-blue-600" className="text-xl font-bold text-blue-600">
           MyShop
         </h1>
-
-        {/* Middle links */}
         <div className="flex gap-6 items-center">
           <Link to="/">Home</Link>
           <Link to="/product">Products</Link>
           <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>
         </div>
-
-        {/* Right side */}
         <div className="flex gap-4 items-center">
-
           {token ? (
             <>
-              <Link to="/cart" className="hover:text-blue-500">
-                🛒 Cart {count} Article
+              <Link
+                to="/cart"
+                className="flex items-center gap-3 bg-white px-4 py-2 rounded-xl text-white hover:opacity-80 transition w-fit"
+              >
+                <div className="relative text-lg">
+                  🛒
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold px-1.5 py-[1px] rounded-full min-w-[16px] text-center">
+                    {count}
+                  </span>
+                </div>
+
               </Link>
 
               <Link to="/profile" className="hover:text-blue-500">
@@ -38,8 +42,10 @@ export default function Navbar({count}) {
                 onClick={() => {
                   localStorage.removeItem("token");
                   window.location.reload();
+                  toast("logout successful")
                 }}
                 className="text-red-500"
+                
               >
                 Logout
               </button>
@@ -58,7 +64,6 @@ export default function Navbar({count}) {
               </Link>
             </>
           )}
-
         </div>
       </div>
     </nav>
